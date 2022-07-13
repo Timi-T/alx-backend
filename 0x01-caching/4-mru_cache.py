@@ -31,7 +31,7 @@ class MRUCache(BaseCaching):
                 self.queue[key] = len(self.queue)
             if key in self.cache_data:
                 old_val = self.queue.get(key)
-                if old_val:
+                if old_val is not None:
                     for k, v in self.queue.items():
                         if v > old_val:
                             self.queue[k] = self.queue[k] - 1
@@ -42,7 +42,7 @@ class MRUCache(BaseCaching):
         """Get an item from cache memory"""
         if key:
             old_val = self.queue.get(key)
-            if old_val:
+            if old_val is not None:
                 for k, v in self.queue.items():
                     if v > old_val:
                         self.queue[k] = self.queue[k] - 1
