@@ -78,7 +78,7 @@ class LFUCache(BaseCaching):
         if key and key in self.count:
             self.count[key] = self.count[key] + 1
             old_val = self.queue.get(key)
-            if old_val:
+            if old_val is not None:
                 for k, v in self.queue.items():
                     if v > old_val:
                         self.queue[k] = self.queue[k] - 1
