@@ -59,7 +59,7 @@ class LFUCache(BaseCaching):
                     self.queue.pop(least_used)
                     print("DISCARD: {}".format(least_used))
                     self.count[key] = 1
-                    self.queue[key] = len(self.queue)
+                    self.queue[key] = len(self.queue) - 1
                     for k, v in self.queue.items():
                         if v < len(self.queue) - 1:
                             self.queue[k] = self.queue[k] - 1
