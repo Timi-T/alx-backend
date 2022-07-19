@@ -17,13 +17,13 @@ class Config():
 
 app = Flask(__name__)
 app.config.from_object('1-app.Config')
-babel = Babel()
+babel = Babel(app)
 
 
 @app.route("/")
 def home():
     """Home page"""
-    return render_template('1-index.html')
+    return render_template('2-index.html')
 
 
 @babel.localeselector
