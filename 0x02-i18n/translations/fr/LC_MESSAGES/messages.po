@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-07-19 11:54+0100\n"
-"PO-Revision-Date: 2022-07-19 11:55+0100\n"
+"POT-Creation-Date: 2022-07-19 12:33+0100\n"
+"PO-Revision-Date: 2022-07-19 12:33+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -17,4 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.3\n"
+
+#: templates/3-index.html:7
+msgid "home_title"
+msgstr "Bienvenue chez Holberton"
+
+#: templates/3-index.html:10
+msgid "home_header"
+msgstr "Bonjour monde!"
 

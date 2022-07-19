@@ -23,8 +23,7 @@ babel = Babel(app)
 @app.route("/")
 def home():
     """Home page"""
-    return render_template('3-index.html', home_header="Hello world",
-                           home_title="Welcome to Holberton")
+    return render_template('3-index.html')
 
 
 @babel.localeselector
