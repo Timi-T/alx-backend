@@ -25,7 +25,6 @@ class Config():
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
-app.config.from_object('1-app.Config')
 babel = Babel(app)
 
 
@@ -60,7 +59,7 @@ def get_locale(locale=None):
     locale = request.args.get('locale')
     if locale and locale in Config.LANGUAGES:
         return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 if __name__ == "__main__":
