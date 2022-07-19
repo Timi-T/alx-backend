@@ -57,7 +57,7 @@ def home():
 
 
 @babel.timezoneselector
-def get_timezone(my_timezone=None):
+def get_timezone(my_timezone=None) -> str:
     """Function to get time zone of user"""
 
     my_timezone = request.args.get('timezone')
@@ -68,9 +68,9 @@ def get_timezone(my_timezone=None):
             tz = timezone(my_timezone)
             return tz
         except pytz.exceptions.UnknownTimeZoneError:
-            return timezone('UTC')
+            return timezone(Config.BABEL_DEFAULT_TIMEZONE)
     else:
-        return timezone('UTC')
+        return timezone(Config.BABEL_DEFAULT_TIMEZONE)
 
 
 @babel.localeselector
