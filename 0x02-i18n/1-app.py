@@ -19,5 +19,10 @@ app = Flask(__name__)
 app.config(Config())
 babel = Babel()
 
+@app.route("/")
+def home():
+    """Home page"""
+    return render_template('1-index.html')
+
 if __name__ == "__main__":
     app.run()
