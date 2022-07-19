@@ -22,13 +22,13 @@ babel = Babel(app)
 
 
 @app.route("/")
-def home():
+def home() -> str:
     """Home page"""
     return render_template('4-index.html')
 
 
 @babel.localeselector
-def get_locale(locale=None):
+def get_locale() -> str:
     """Select Language"""
     locale = request.args.get('locale')
     if locale and locale in Config.LANGUAGES:

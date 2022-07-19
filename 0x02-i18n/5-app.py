@@ -6,6 +6,7 @@ Creating an i18n application
 from multiprocessing.sharedctypes import Value
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
+from typing import Union, Dict
 
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ class Config():
 babel = Babel(app)
 
 
-def get_user():
+def get_user() -> Union[Dict, None]:
     """Get a user information"""
     id = request.args.get('login_as')
     if id:
@@ -42,19 +43,19 @@ def get_user():
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """Execute before other commands"""
     g.user = get_user()
 
 
 @app.route("/")
-def home():
+def home() -> str:
     """Home page"""
     return render_template('5-index.html')
 
 
 @babel.localeselector
-def get_locale(locale=None):
+def get_locale(locale=None) -> str:
     """Select Language"""
     locale = request.args.get('locale')
     if locale and locale in Config.LANGUAGES:
