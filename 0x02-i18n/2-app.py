@@ -4,10 +4,9 @@ Creating an i18n application
 """
 
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, _
 
 
-app = Flask(__name__)
 class Config():
     """Configuration class for babel"""
 
@@ -16,6 +15,8 @@ class Config():
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+app = Flask(__name__)
+app.config.from_object('1-app.Config')
 babel = Babel(app)
 
 
@@ -27,7 +28,7 @@ def home() -> str:
 
 @babel.localeselector
 def get_locale() -> str:
-    return request.accept_languages.best_match(Config.LANGUAGES)
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == "__main__":
