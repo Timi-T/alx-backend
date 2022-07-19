@@ -4,12 +4,10 @@ Creating an i18n application
 """
 
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 app = Flask(__name__)
-
-
 class Config():
     """Configuration class for babel"""
 

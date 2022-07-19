@@ -5,7 +5,7 @@ Creating an i18n application
 
 from multiprocessing.sharedctypes import Value
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, _
+from flask_babel import Babel
 from typing import Union, Dict
 
 
