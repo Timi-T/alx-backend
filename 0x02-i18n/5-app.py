@@ -32,10 +32,11 @@ babel = Babel(app)
 def get_user():
     """Get a user information"""
     id = request.args.get('login_as')
-    try:
-        id = int(id)
-    except ValueError:
-        id = None
+    if id:
+        try:
+            id = int(id)
+        except ValueError:
+            id = None
     if id:
         return users.get(id)
     return None
