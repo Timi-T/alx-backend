@@ -51,7 +51,7 @@ def before_request():
 @app.route("/")
 def home():
     """Home page"""
-    return render_template('5-index.html', user=g.user)
+    return render_template('5-index.html')
 
 
 @babel.localeselector
