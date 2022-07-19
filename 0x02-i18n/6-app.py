@@ -5,9 +5,10 @@ Creating an i18n application
 
 from multiprocessing.sharedctypes import Value
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
+app = Flask(__name__)
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -24,7 +25,6 @@ class Config():
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
-app = Flask(__name__)
 babel = Babel(app)
 
 
