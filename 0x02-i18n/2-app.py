@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Creating an i18n application
+Creating an i18n application that supports different languages
 """
 
 from flask import Flask, render_template, request
@@ -22,12 +22,13 @@ babel = Babel(app)
 
 @app.route("/")
 def home() -> str:
-    """Home page"""
+    """Home page that displays a simple message"""
     return render_template('2-index.html')
 
 
 @babel.localeselector
 def get_locale() -> str:
+    """Select Language for the current user"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
