@@ -18,15 +18,8 @@ import { createClient } from 'redis';
   subscriber.on('message', async (err, msg) => {
     console.log(msg);
     if (msg === 'KILL_SERVER') {
-      await subscriber.unsubscribe('holberton school channel');
+      subscriber.unsubscribe('holberton school channel');
       process.exit(0);
     }
   });
-
-  //await subscriber.subscribe('holberton school channel', (err, msg) => {
-  //console.log(msg);
-  //if (msg === 'KILL_SERVER') {
-    //subscriber.unsubscribe('holberton school channel');
-  ///}
-  //});
 })();

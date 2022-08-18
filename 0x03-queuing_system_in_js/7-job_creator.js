@@ -65,7 +65,7 @@ const queue = kue.createQueue();
       });
     
     push_notification_code_2.on('failed', (err) => {
-      console.log('Notification job failed', err);
+      console.log('Notification job failed:', err);
     });
 
     push_notification_code_2.on('progress', (progress, data) => {

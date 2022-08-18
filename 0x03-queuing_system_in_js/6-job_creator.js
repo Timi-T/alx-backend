@@ -2,7 +2,6 @@
 
 const kue = require('kue');
 
-//const string = kue.string;
 const queue = kue.createQueue();
 
 (async () => {
