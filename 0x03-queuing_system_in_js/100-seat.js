@@ -11,7 +11,6 @@ const kue = require('kue');
 const express = require('express');
 
 async function reserveSeat(number) {
-  console.log(number)
   client.set('available_seats', number);
 }
 
@@ -20,12 +19,13 @@ async function getCurrentAvailableSeats() {
   return await getSeats('available_seats')
 }
 
-client.set('available_seats', 50);
-client.set('reservationEnabled', true);
-
 const queue = kue.createQueue();
 const app = express();
-app.listen(1245, () => console.log('Express app started!'));
+app.listen(1245, () => {
+  client.set('available_seats', 50);
+  client.set('reservationEnabled', true);
+  console.log('Express app started!')
+});
 
 app.get('/available_seats', (req, res) => {
   getCurrentAvailableSeats()
@@ -36,25 +36,24 @@ app.get('/available_seats', (req, res) => {
 
 app.get('/reserve_seat', (req, res) => {
   const reservationStatus = client.get('reservationEnabled');
-  if (!reservationStatus) {
+  console.log(reservationStatus);
+  if (reservationStatus === false) {
     res.send({ "status": "Reservation are blocked" });
   }
-  const reserveSeat = queue.create('reserve_seat');
-  var resStatus = {};
-  reserveSeat.save((err) => {
+  const reserveSeats = queue.create('email');
+  reserveSeats.on('complete', () => {
+    console.log(`Seat reservation job ${reserveSeats.id} completed`);
+  });
+
+  reserveSeats.on('failed', ()=> {
+    console.log(`Seat reservation job ${reserveSeats.id} completed`);
+  });
+  reserveSeats.save((err) => {
     if (!err) {
       res.send({ "status": "Reservation in process" });
     } else {
-      resStatus.status = "Reservation failed";
+      res.send({ "status": "Reservation failed" })
     }
-  });
-
-  reserveSeat.on('complete', () => {
-    console.log(`Seat reservation job ${reserveSeat.id} completed`);
-  });
-
-  reserveSeat.on('failed', ()=> {
-    console.log(`Seat reservation job ${reserveSeat.id} completed`);
   });
 });
 
@@ -63,7 +62,6 @@ app.get('/process', (req, res) => {
     getCurrentAvailableSeats()
       .then((seats) => {
         reserveSeat(seats - 1);
-        console.log('processed')
         if (seats === 0) {
           client.set('reservationEnabled', false);
         } else if (seats >= 0) {
